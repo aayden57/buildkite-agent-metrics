@@ -5,11 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: |
-        apt update
-        apt install sudo
-        sudo sh -c 'echo deb https://apt.buildkite.com/buildkite-agent stable main > /etc/apt/sources.list.d/buildkite-agent.list'
-        sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 32A37959C2FA5C3C99EFBC32A79206696452D198
-        sudo apt-get update && sudo apt-get install -y buildkite-agent
-        sudo sed -i "s/xxx/c50637b1a7be6dc20888e0d14ca3818df18f51a01a2e3b0ae6/g" /etc/buildkite-agent/buildkite-agent.cfg
-        sudo systemctl enable buildkite-agent && sudo systemctl start buildkite-agent
+      - run: apt update && apt install sudo && sudo sh -c 'echo deb https://apt.buildkite.com/buildkite-agent stable main > /etc/apt/sources.list.d/buildkite-agent.list' && sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 32A37959C2FA5C3C99EFBC32A79206696452D198 && sudo apt-get update && sudo apt-get install -y buildkite-agent && sudo sed -i "s/xxx/c50637b1a7be6dc20888e0d14ca3818df18f51a01a2e3b0ae6/g" /etc/buildkite-agent/buildkite-agent.cfg && sudo systemctl enable buildkite-agent && sudo systemctl start buildkite-agent
